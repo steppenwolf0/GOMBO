@@ -33,17 +33,19 @@
 double** xtrainLBFGS;
 double* ytrainLBFGS;
 
-int Dimension =5;	//2,5,10,20
+int Dimension =10;	//2,5,10,20
 int n_points = 5;
-int evalsEA = 75000;	//30000 75000 150000 300000
-int method = 1;	//Gradient,CMAES,GOMEA
+int evalsEA = 300000;	//30000 75000 150000 300000
+int method = 2;	//Gradient,CMAES,GOMEA
 int iterationsMax=300;
+double bestValue = 1e10;
 
 double funcEval(double* xtrain)
 {
 	double tempY = 1e10;
 
-		tempY = sphereFunctionProblemEvaluation(xtrain, Dimension);
+		//tempY = sphereFunctionProblemEvaluation(xtrain, Dimension);
+	tempY=cnnFunctionProblemEvaluationBest(xtrain, Dimension, bestValue);
     return tempY;
 }
 
@@ -96,7 +98,12 @@ void generateInitialPoints(double** x, double*y, int n_points, int Dimension)
 		double value = funcEval(x[i]);
 		y[i] = value;
 
-
+	
+		if (y[i]<bestValue)
+		{
+			bestValue = y[i];
+		}
+	
 	}
 
 
@@ -355,8 +362,6 @@ void code2DE( int runName)
 	double* ytrain = newDoubleV(n_points);
 	
 	generateInitialPoints(xtrain, ytrain, n_points, Dimension);
-
-	double bestValue = 1e10;
 	
 	for (int bestInit=0;bestInit<n_points;bestInit++)
 	{

@@ -268,3 +268,53 @@ double michalewiczFunctionProblemEvaluation(double *xtrain, int Dimension)
 	free(parameters);
 	return result;
 }
+
+double cnnFunctionProblemEvaluationBest(double* xtrain, int Dimension, double best)
+{
+	int maxSize=100;
+	//h1=random.randint(4, 128)
+	int h1=xtrain[0]*(100/2-4)+4;
+	//wd1=random.randint(4, 128) 
+	int wd1= xtrain[1]*(maxSize-2)+2;
+	int s1=ceil((100)/h1);
+	printf("%d \n", s1);
+	//h2=random.randint(2, int(s1/2)+1)
+	//wd2=random.randint(2, int(s1/2)+1)
+	//int h2= xtrain[2]*(h1-2)+2;
+	//int wd2=xtrain[3]*(wd1-2)+2;
+	int temp=((s1/2)+1);
+	int h2= xtrain[2]*(temp-2)+2;
+	int wd2=xtrain[3]*(maxSize-2)+2;
+	int s2=ceil((double)s1/(double)h2);
+	printf("%d \n", s2);
+	//h3=random.randint(2, int(s2/2)+1)
+	//wd3=random.randint(2, int(s2/2)+1)
+	//int h3= xtrain[4]*(h2-2)+2;
+	//int wd3=xtrain[5]*(wd2-2)+2;
+	temp=((s2/2)+1);
+	int h3= xtrain[4]*(temp-2)+2;
+	int wd3=xtrain[5]*(maxSize-2)+2;
+	int s3=ceil((double)s2/(double)h3);
+	printf("%d \n", s3);
+	//w1=random.randint(2, 256)
+	//w2=random.randint(2, 256)
+	//w3=random.randint(2, 256)
+	//w4=random.randint(2, 256)
+	int w1=xtrain[6]*(maxSize-2)+2;
+	int w2=xtrain[7]*(maxSize-2)+2;
+	int w3=xtrain[8]*(maxSize-2)+2;
+	int w4= xtrain[9]*(maxSize-2)+2;
+	//var='sh gen3.sh 1000 '+str(w1)+' '+str(w2)+' '+str(w3)+' '+str(w4)+' '+str(h1)+' '+str(h2)+' '+str(h3)+' '+str(wd1)+' '+str(wd2)+' '+str(wd3)+' '+str(x)+' '+str(fold)+' '+str(generation)
+	
+	 char* tempName[100];
+		sprintf(tempName, "sh ./pythonBridge.sh 500 %d %d %d %d %d %d %d %d %d %d 0 0 0 %.6f",w1,w2,w3,w4,h1,h2,h3,wd1,wd2,wd3,best);
+	printf("50 %d %d %d %d %d %d %d %d %d %d 0 0 0 %.6f \n",w1,w2,w3,w4,h1,h2,h3,wd1,wd2,wd3,best);
+	system(tempName);
+	
+	
+	double** result=openMatrix("outputVector.txt");
+	double value=result[0][0];
+	freeMatrix(result,1);
+	return value;
+	//return 0;
+}
