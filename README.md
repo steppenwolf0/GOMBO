@@ -1,5 +1,8 @@
 GOMEA Based Bayesian Optimization
 
-make clean
-make
-./bayesOpt 0
+Instructions
+
+make clean \n
+make \n
+./bayesOpt 0 \n
+
