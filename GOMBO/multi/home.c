@@ -36,7 +36,7 @@ double* ytrainLBFGS;
 int Dimension =5;	//2,5,10,20
 int n_points = 5;
 int evalsEA = 75000;	//30000 75000 150000 300000
-int method = 0;	//Gradient,CMAES,GOMEA
+int method = 1;	//Gradient,CMAES,GOMEA
 int iterationsMax=300;
 
 double funcEval(double* xtrain)
