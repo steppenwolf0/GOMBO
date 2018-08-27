@@ -9,4 +9,5 @@ double michalewiczFunctionProblemEvaluation(double *xtrain, int Dimension);
 
 double cnnFunctionProblemEvaluation(double* xtrain, int Dimension);
 double cnnFunctionProblemEvaluationOriginal(double* xtrain, int Dimension);
+double cnnFunctionProblemEvaluationBest(double* xtrain, int Dimension, double best);
 #endif
