@@ -11,7 +11,6 @@ from IPython.display import display, Image
 from scipy import ndimage
 from funcCNN import *
 from crossValB import *
-from outputVal import *
 
 f=open('outputVector.txt', 'w')
 f.write('1\n')
